@@ -14,8 +14,6 @@ entity hex_mux is
 
  architecture mux_logic of hex_mux is
  
- 
- 
  begin
  
  -- Creation of the mux process using with select
