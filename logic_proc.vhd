@@ -5,9 +5,9 @@ library work;
 
 entity logic_proc is
  	port (
-			logic_in1, logic_in0 : in std_logic_vector(3 downto 0);
+			logic_in1, logic_in0		: in std_logic_vector(3 downto 0);
 			logic_select 			: in std_logic_vector(1 downto 0); 
-			logic_out				: out std_logic_vector(3 downto 0)
+			logic_out			: out std_logic_vector(3 downto 0)
 			);
 
  end logic_proc;
