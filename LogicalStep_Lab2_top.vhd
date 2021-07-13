@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 library work;
 
 entity LogicalStep_Lab2_top is port (
-		pb										: in	std_logic_vector(6 downto 0); -- push buttons used for data input selection/operation control
+		pb									: in	std_logic_vector(6 downto 0); -- push buttons used for data input selection/operation control
 		sw 									: in  std_logic_vector(15 downto 0);-- The switch inputs used for data inputs
 		leds									: out std_logic_vector(5 downto 0) 	--  leds for outputs
 												); 
@@ -21,14 +21,14 @@ architecture Circuit of LogicalStep_Lab2_top is
  	port (
 			hex_num3, hex_num2, hex_num1, hex_num0 : in std_logic_vector(3 downto 0);
 			mux_select 										: in std_logic_vector(1 downto 0); 
-			hex_out 											: out std_logic_vector(3 downto 0)
+			hex_out 										: out std_logic_vector(3 downto 0)
 			);
  end component;
  
  component mux_2_in -- Penta-bit 2 to 1 Mux definition
  port (
-			num1 					: in std_logic_vector(4 downto 0);
-			num0					: in std_logic_vector(4 downto 0);
+			num1 				: in std_logic_vector(4 downto 0);
+			num0				: in std_logic_vector(4 downto 0);
 			mux_sel				: in std_logic; 
 			mux_out				: out std_logic_vector(4 downto 0)
 			);
@@ -36,18 +36,18 @@ end component;
  
  component full_adder_4bit -- 4bit full adder definition
  	port (
-			cin						: in std_logic;
+			cin			: in std_logic;
 			hex_val_A, hex_val_B	: in std_logic_vector(3 downto 0);
-			hex_sum 					: out std_logic_vector(3 downto 0);
-		   carry_out				: out std_logic
+			hex_sum 		: out std_logic_vector(3 downto 0);
+		  	carry_out		: out std_logic
 			);
  end component;
 
  component logic_proc -- Logical processor definition
  	port (
 			logic_in1, logic_in0 	: in std_logic_vector(3 downto 0);
-			logic_select  				: in std_logic_vector(1 downto 0); 
-			logic_out 					: out std_logic_vector(3 downto 0)
+			logic_select  		: in std_logic_vector(1 downto 0); 
+			logic_out 		: out std_logic_vector(3 downto 0)
 			);
  end component;
 
@@ -59,15 +59,15 @@ end component;
 
 
 -- 5 bit adder and logic final mux inputs
-signal Adder_final, Logic_final 												: std_logic_vector(4 downto 0);
+signal Adder_final, Logic_final 		: std_logic_vector(4 downto 0);
 
 
 -- input operands
-signal Operand1, Operand2, Operand3, Operand4 							: std_logic_vector(3 downto 0);
+signal Operand1, Operand2, Operand3, Operand4 	: std_logic_vector(3 downto 0);
 
 
 -- Mux A and B outputs and 4-bit adder and logic processor outputs
-signal mux_A_out, mux_B_out, Adder_result, Logical_result			: std_logic_vector(3 downto 0);
+signal mux_A_out, mux_B_out, Adder_result, Logical_result	: std_logic_vector(3 downto 0);
 
 
 -- Mux A, B and logical processor mux selectors
@@ -75,7 +75,7 @@ signal Operand_Select_A, Operand_Select_B, Logic_Function_Select	: std_logic_vec
 	
 	
 -- Final mux selector and 4-bit adder carry bit
-signal ALProcessor_Select, Adder_carry										: std_logic ;
+signal ALProcessor_Select, Adder_carry	: std_logic ;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 
@@ -90,10 +90,10 @@ Operand3 <= sw(11 downto 8);
 Operand4 <= sw(15 downto 12);
 
 -- Mux selectors connected to set inputs
-Operand_Select_A			<= pb(1 downto 0);
-Operand_Select_B 			<= pb(3 downto 2);
+Operand_Select_A	<= pb(1 downto 0);
+Operand_Select_B 	<= pb(3 downto 2);
 Logic_Function_Select 	<= pb(5 downto 4);
-ALProcessor_Select 		<= pb(6);
+ALProcessor_Select 	<= pb(6);
 
 
 -- Instance of Mux A instance connected with operands and selector 
